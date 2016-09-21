@@ -1,3 +1,4 @@
+package View;
 import javax.swing.JOptionPane;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -38,6 +39,7 @@ public static Stage getStage() {
 private void initComponents() {
 	pane = new AnchorPane(); // INSTANCIA PAINEL 
 	pane.setPrefSize(400, 300);			// SETA PAINEL
+	pane.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, blue 0%, silver 100%);");
 	txLogin = new TextField();
 	txLogin.setPromptText("Digite aqui seu login");
 	txSenha = new PasswordField();
@@ -45,6 +47,7 @@ private void initComponents() {
 	btEntrar = new Button("Entrar");
 	btSair = new Button("Sair");
 	pane.getChildren().addAll(txLogin, txSenha, btEntrar, btSair); // FILHOS DO PAINEL
+	
 }
 
 
@@ -77,7 +80,12 @@ private void initListeners() {
 
 private void logar(){
 	if (txLogin.getText().equals("admin") && txSenha.getText().equals("admin")) {
-			// TODO Abrir a tela VitrineApp
+		try {
+			new VitrineApp().start(new Stage());
+				LoginApp.getStage().close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 	} else {
 		JOptionPane.showMessageDialog(null, "Login e/ou senha inválidos", "Erro", JOptionPane.ERROR_MESSAGE);
 	}
